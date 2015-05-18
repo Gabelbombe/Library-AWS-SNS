@@ -1,8 +1,8 @@
 {
-  "name": "ehime/DynamoDB-Wrapper",
-  "homepage": "http://github.com/DynamoDB-Wrapper/wiki",
-  "description": "PHP Wrapper for DynamoDB",
-  "keywords": ["aws","amazon","dynamo","php"],
+  "name": "ehime/Library-AWS-SNS",
+  "homepage": "http://github.com/ehime/Library-AWS-SNS",
+  "description": "PHP Wrapper for Simple Notification Service",
+  "keywords": ["aws","amazon","sns","php"],
   "type": "library",
   "license": "Apache-2.0",
   "authors": [
