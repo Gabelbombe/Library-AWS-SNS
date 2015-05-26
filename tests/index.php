@@ -11,4 +11,5 @@ $sns = New Wrappers\SimpleNotificationService\SNS(
     getenv('KEY'), getenv('SECRET')
 );
 
-print_r($sns);
+print_r($sns->createTopic('Item2'));
+

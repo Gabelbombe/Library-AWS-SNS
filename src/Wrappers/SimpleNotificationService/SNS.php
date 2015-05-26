@@ -186,7 +186,7 @@ Namespace Wrappers\SimpleNotificationService
         /**
          * Create an SNS topic
          *
-         * @link http://docs.amazonwebservices.com/sns/latest/api/API_CreateTopic.html
+         * @link http://docs.amazonwebservices.com/sns/latest/api/API_listTopic.html
          * @param string $name
          * @return string - TopicARN
          * @throws \InvalidArgumentException
@@ -528,6 +528,8 @@ Namespace Wrappers\SimpleNotificationService
             // Check return code
             if (false === $this->validateResponse($info['http_code']))
             {
+                print_r($xmlResponse);
+
                 // Response not in 200 range
                 if (isset($xmlResponse->Error))
                 {
@@ -557,7 +559,7 @@ Namespace Wrappers\SimpleNotificationService
          */
         private function validateResponse($code)
         {
-            return 2 === floor($code / 100);
+            return 2 == floor($code / 100);
         }
 
         /**
