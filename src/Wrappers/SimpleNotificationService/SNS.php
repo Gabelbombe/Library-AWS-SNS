@@ -13,8 +13,7 @@ Namespace Wrappers\SimpleNotificationService
      * @link https://github.com/ehime/Library-AWS-SNS
      * @version 0.1
      */
-
-    Class SimpleNotificationService
+    Class SNS
     {
         private $accessKey      = null,
                 $secretKey      = null;
