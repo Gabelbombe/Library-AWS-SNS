@@ -13,5 +13,9 @@
   ],
   "require": {
     "aws/aws-sdk-php": "2.*"
-  }
+  },
+  "autoload": {
+    "psr-4": {
+      "Wrappers\\": "src/Wrappers/"
+    }
 }

@@ -1,6 +1,5 @@
-
 <?php
-Namespace Wrappers
+Namespace Wrappers\SimpleNotificationService
 {
     /**
      * Lightweight API interface with the Amazon Simple Notification Service
@@ -14,8 +13,6 @@ Namespace Wrappers
      * @link https://github.com/ehime/Library-AWS-SNS
      * @version 0.1
      */
-
-    require dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
 
     Class SimpleNotificationService
     {
