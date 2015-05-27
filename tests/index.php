@@ -11,12 +11,71 @@ $sns = New Wrappers\SimpleNotificationService\SNS(
     getenv('KEY'), getenv('SECRET')
 );
 
-// Create a Topic
-$topicArn = $sns->createTopic('Test Topic');
 
-print_r($sns->listTopics());
 
-// Set the Topic's Display Name (required)
-//$sns->setTopicAttributes($topicArn, 'DisplayName', 'My SNS Topic Display Name');
+$sms   = '12064209564';
+$topic = 'SNSTest';
 
-//print_r($sns->listTopics());
+if (filter_input(INPUT_GET, 'type', FILTER_VALIDATE_REGEXP, [
+    'options' => [
+        'regexp' => '/^[a-zA-Z]+$/'
+    ]
+]))
+{
+    switch (strtolower($_GET['type']))
+    {
+        case ('subscribe'):
+
+            $arn = false;
+
+            foreach($sns->listTopics() AS $topics)
+            {
+                if ($topic == preg_replace('/^.*:\s*/', '', $topics['TopicArn']))
+                {
+                    echo "Removing duplicate ARN: {$topics['TopicArn']}\n\n";
+
+                    $sns->deleteTopic($topics['TopicArn']);
+                    break;
+                }
+            }
+
+            $arn = $sns->createTopic($topic);
+
+            $sns->setTopicAttributes($arn, 'DisplayName', '....')
+                ->subscribe($arn, 'sms', $sms);
+
+            echo "Subscription request sent to: {$sms}\n";
+
+        break;
+
+
+        case ('publish'):
+
+            if ($message = filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING))
+            {
+                if (256 <= mb_strlen($message, 'utf8')) Throw New \Exception ('Input message can be no larger than 256 bytes');
+
+                foreach($sns->listTopics() AS $topics)
+                {
+                    if ($topic == preg_replace('/^.*:\s*/', '', $topics['TopicArn']))
+                    {
+                        echo "Sending message: {$message}";
+
+                        echo "To Topic ARN: {$topics['TopicArn']}\n";
+                        echo "Confirmation: " . $sns->publish($topics['TopicArn'], $message);
+                        break;
+                    }
+                }
+            }
+
+        break;
+
+
+        case ('list'):
+            echo "\nTopics are: \n\n" . print_r($sns->listTopics(), 1);
+            echo "\n";
+            echo "\nSubscriptions are: \n\n" . print_r($sns->listSubscriptions(), 1);
+            break;
+
+    }
+}

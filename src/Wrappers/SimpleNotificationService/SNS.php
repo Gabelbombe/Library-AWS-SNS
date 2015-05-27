@@ -149,7 +149,7 @@ Namespace Wrappers\SimpleNotificationService
             // Finally send request
             $this->request('AddPermission', $params);
 
-            return true;
+            return $this;
         }
 
         /**
@@ -226,7 +226,7 @@ Namespace Wrappers\SimpleNotificationService
                 'TopicArn' => $topicArn
             ]);
 
-            return true;
+            return $this;
         }
 
         /**
@@ -389,7 +389,7 @@ Namespace Wrappers\SimpleNotificationService
                 'Label' => $label
             ]);
 
-            return true;
+            return $this;
         }
 
         /**
@@ -414,7 +414,7 @@ Namespace Wrappers\SimpleNotificationService
                 'AttributeValue' => $attrValue,
             ]);
 
-            return true;
+            return $this;
         }
 
         /**
@@ -439,7 +439,7 @@ Namespace Wrappers\SimpleNotificationService
                 'Endpoint' => $endpoint
             ]);
 
-            return true;
+            return $this;
         }
 
         /**
@@ -460,7 +460,7 @@ Namespace Wrappers\SimpleNotificationService
                 'SubscriptionArn' => $subscriptionArn
             ]);
 
-            return true;
+            return $this;
         }
 
 
