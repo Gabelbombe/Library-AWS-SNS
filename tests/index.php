@@ -11,5 +11,12 @@ $sns = New Wrappers\SimpleNotificationService\SNS(
     getenv('KEY'), getenv('SECRET')
 );
 
-print_r($sns->createTopic('Item2'));
+// Create a Topic
+$topicArn = $sns->createTopic('Test Topic');
 
+print_r($sns->listTopics());
+
+// Set the Topic's Display Name (required)
+//$sns->setTopicAttributes($topicArn, 'DisplayName', 'My SNS Topic Display Name');
+
+//print_r($sns->listTopics());

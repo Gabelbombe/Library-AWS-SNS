@@ -197,6 +197,10 @@ Namespace Wrappers\SimpleNotificationService
 
                 Throw New \InvalidArgumentException('Must supply a Name to create topic');
 
+            if (preg_match('/\s/', $name))
+
+                Throw New \InvalidArgumentException('Topic name cannot contain whitespace');
+
             $resultXml = $this->request('CreateTopic', [
                 'Name' => $name
             ]);
@@ -528,8 +532,6 @@ Namespace Wrappers\SimpleNotificationService
             // Check return code
             if (false === $this->validateResponse($info['http_code']))
             {
-                print_r($xmlResponse);
-
                 // Response not in 200 range
                 if (isset($xmlResponse->Error))
                 {
@@ -554,7 +556,7 @@ Namespace Wrappers\SimpleNotificationService
         /**
          * Check the curl response code - anything in 200 range
          *
-         * @param int $code
+         * @param int|mixed $code
          * @return bool
          */
         private function validateResponse($code)
